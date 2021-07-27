@@ -7,18 +7,11 @@ import com.example.myexpenses.database.ExpenseDatabaseDao
 
 class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
 
-    val database = dataSource
-    private val _amount = MutableLiveData<String>()
-    val amount: LiveData<String>
-        get() = _amount
+    private val database = dataSource
 
-    private val _category = MutableLiveData<String>()
-    val category: LiveData<String>
-        get() = _category
-
-    private val _description = MutableLiveData<String>()
-    val description: LiveData<String>
-        get() = _description
+    val amount = MutableLiveData<Double?>()
+    val category = MutableLiveData<String>()
+    val description = MutableLiveData<String>()
 
     private val _errorMessage = MutableLiveData<Boolean?>()
     val errorMessage: LiveData<Boolean?>
@@ -43,15 +36,15 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
     }
 
     private fun isDataValid(): Boolean {
-        return _amount.value != null &&
-                !_category.value.isNullOrEmpty()
+        return amount.value != null &&
+                !category.value.isNullOrEmpty()
     }
 
     private fun buildExpense(): Expense {
         return Expense(
-            expenseAmount = _amount.value!!.toDouble(),
-            expenseDescription = _description.value,
-            expenseCategory = _category.value!!
+            expenseAmount = amount.value!!.toDouble(),
+            expenseDescription = description.value,
+            expenseCategory = category.value!!
         )
     }
 

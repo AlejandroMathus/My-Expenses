@@ -1,29 +1,31 @@
 package com.example.myexpenses
-/*
 
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener
-import kotlinx.android.synthetic.main.list_item_expense.view.*
+import com.example.myexpenses.util.MoneyFormatter
 
-@BindingAdapter("amount")
-fun setAmount(view: EditText, newValue: Double) {
-    // Important to break potential infinite loops.
-    if (view. != newValue) {
-        view.time = newValue
+
+@BindingAdapter("android:text")
+fun EditText.bindAnyToString(value: Any?) {
+    value?.let {
+        if (value is Double) {
+            val newValue = MoneyFormatter().format(value)
+            if (text.toString() != newValue) {
+                setText(newValue)
+            }
+        }
     }
 }
 
-@InverseBindingAdapter(attribute = "amount")
-fun getTime(view: EditText): Double {
-    return view.getTime()
-}
+@InverseBindingAdapter(attribute = "android:text")
+fun EditText.getDoubleFromBinding(): Double? {
+    val result = text.toString()
+    return try {
+        if (result.endsWith(".")) return null
 
-@BindingAdapter("app:timeAttrChanged")
-fun setListeners(
-    view: EditText,
-    attrChange: InverseBindingListener
-) {
-    // Set a listener for click, focus, touch, etc.
-}*/
+        result.toDouble()
+    } catch(e: NumberFormatException) {
+        null
+    }
+}
