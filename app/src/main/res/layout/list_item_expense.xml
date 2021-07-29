@@ -27,11 +27,11 @@
             android:layout_height="20dp"
             android:gravity="center_horizontal"
             android:textAlignment="center"
+            app:expenseFormatted="@{thisExpense}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/category_string"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             tools:text="1.000.000,00" />
 
         <TextView
@@ -40,15 +40,13 @@
             android:layout_height="20dp"
             android:gravity="center_horizontal"
             android:textAlignment="center"
+            app:expenseCategoryString="@{thisExpense}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/amount_string"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Entertainment" />
 
-
-        <!--            app:expenseCategoryString="@{}"
-        app:expenseAmountString="@{}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
