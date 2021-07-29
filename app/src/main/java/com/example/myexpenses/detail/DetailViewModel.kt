@@ -33,7 +33,7 @@ class DetailViewModel(
 
     fun onDelete() {
         getExpense()
-        database.delete(expense)
+        //database.delete(expense)
         _navigateToMain.value = true
         _showToastEvent.value = true
     }

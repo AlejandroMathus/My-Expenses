@@ -5,11 +5,8 @@ import androidx.room.*
 
 @Dao
 interface ExpenseDatabaseDao{
-    @Insert
-    fun insert(expense: Expense)
-
-    @Update
-    fun update(expense: Expense)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(expense: Expense)
 
     @Delete
     fun delete(expense: Expense)

@@ -4,6 +4,7 @@ package com.example.myexpenses.main
 import androidx.lifecycle.*
 import com.example.myexpenses.database.Expense
 import com.example.myexpenses.database.ExpenseDatabaseDao
+import kotlinx.coroutines.launch
 
 class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
 
@@ -25,9 +26,7 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
         val valid = isDataValid()
         if (valid) {
             val expense = buildExpense()
-
-            database.insert(expense)
-
+            insert(expense)
             _navigateToMain.value = true
         } else {
             _errorMessage.value = true
@@ -42,10 +41,14 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
 
     private fun buildExpense(): Expense {
         return Expense(
-            expenseAmount = amount.value!!.toDouble(),
+            expenseAmount = amount.value!!,
             expenseDescription = description.value,
             expenseCategory = category.value!!
         )
+    }
+
+    private fun insert(expense: Expense) = viewModelScope.launch {
+        database.insert(expense)
     }
 
     fun mainNavigated() {
