@@ -48,3 +48,10 @@ fun TextView.setExpenseCategoryString(item: Expense?) {
         text = item.expenseCategory
     }
 }
+
+@BindingAdapter("expenseDescriptionString")
+fun TextView.setExpenseDescriptionString(item: Expense?) {
+    item?.let {
+        text = item.expenseDescription
+    }
+}

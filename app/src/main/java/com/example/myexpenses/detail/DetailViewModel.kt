@@ -1,11 +1,9 @@
 package com.example.myexpenses.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.example.myexpenses.database.Expense
 import com.example.myexpenses.database.ExpenseDatabaseDao
+import kotlinx.coroutines.launch
 
 class DetailViewModel(
     private val expenseKey: Long = 0L,
@@ -14,10 +12,9 @@ class DetailViewModel(
 
     val database = dataSource
 
-    private val expense: Expense
+    private val expense: LiveData<Expense>
 
     fun getExpense() = expense
-
 
     init {
         expense = database.getExpenseWithId(expenseKey)
@@ -32,10 +29,18 @@ class DetailViewModel(
         get() = _showToastEvent
 
     fun onDelete() {
-        getExpense()
-        //database.delete(expense)
+        val thisExpense: Expense = expense.value!!
+        delete(thisExpense)
         _navigateToMain.value = true
         _showToastEvent.value = true
+    }
+
+    private fun delete(expense: Expense) = viewModelScope.launch {
+        database.delete(expense)
+    }
+
+    fun doneShowingToast() {
+        _showToastEvent.value = null
     }
 
     fun onClose() {
@@ -44,10 +49,6 @@ class DetailViewModel(
 
     fun doneNavigating() {
         _navigateToMain.value = null
-    }
-
-    fun doneShowingToast() {
-        _showToastEvent.value = null
     }
 
 }

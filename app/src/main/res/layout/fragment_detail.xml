@@ -22,6 +22,7 @@
             app:layout_constraintBottom_toTopOf="@+id/category_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:expenseFormatted="@{detailViewModel.expense}"
             tools:text="1.000.000"/>
 
         <TextView
@@ -32,6 +33,7 @@
             app:layout_constraintBottom_toTopOf="@+id/description_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:expenseCategoryString="@{detailViewModel.expense}"
             tools:text="Entertainment" />
 
         <TextView
@@ -42,6 +44,7 @@
             app:layout_constraintBottom_toTopOf="@+id/delete_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:expenseDescriptionString="@{detailViewModel.expense}"
             tools:text="Other" />
 
         <Button
@@ -52,6 +55,7 @@
             app:layout_constraintBottom_toTopOf="@+id/close_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> detailViewModel.onDelete()}"
             tools:text="Delete" />
 
         <Button

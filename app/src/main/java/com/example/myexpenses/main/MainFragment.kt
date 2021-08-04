@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myexpenses.R
 import com.example.myexpenses.database.ExpenseDatabase
 import com.example.myexpenses.databinding.FragmentMainBinding
@@ -63,6 +65,15 @@ class MainFragment : Fragment() {
                         .actionMainFragmentToNewExpenseFragment()
                 )
                 mainViewModel.newExpenseFinishedNavigating()
+            }
+        })
+
+        mainViewModel.navigateToExpenseDetail.observe(viewLifecycleOwner, Observer { expense ->
+            expense?.let {
+                this.findNavController().navigate(
+                    MainFragmentDirections
+                        .actionMainFragmentToDetailFragment(expense))
+                mainViewModel.onExpenseDetailNavigated()
             }
         })
 

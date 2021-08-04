@@ -9,10 +9,10 @@ interface ExpenseDatabaseDao{
     suspend fun insert(expense: Expense)
 
     @Delete
-    fun delete(expense: Expense)
+    suspend fun delete(expense: Expense)
 
     @Query("SELECT * from expenses_table WHERE expenseId = :key")
-    fun getExpenseWithId(key: Long): Expense
+    fun getExpenseWithId(key: Long): LiveData<Expense>
 
     @Query("SELECT * FROM expenses_table ORDER BY expenseId DESC")
     fun getAllExpenses(): LiveData<List<Expense>>
