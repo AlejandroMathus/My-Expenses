@@ -18,16 +18,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:onClick="@{() -> clickListener.onClick(thisExpense)}">
 
         <TextView
             android:id="@+id/amount_string"
             android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:gravity="center_horizontal"
-            android:textAlignment="center"
+            android:layout_height="match_parent"
+            android:gravity="center"
             app:expenseFormatted="@{thisExpense}"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/category_string"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +37,9 @@
         <TextView
             android:id="@+id/category_string"
             android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:gravity="center_horizontal"
-            android:textAlignment="center"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="20sp"
             app:expenseCategoryString="@{thisExpense}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -11,12 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.myexpenses.R
 import com.example.myexpenses.database.ExpenseDatabase
 import com.example.myexpenses.database.ExpenseDatabaseDao
 import com.example.myexpenses.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
+
+    val arguments: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +32,6 @@ class DetailFragment : Fragment() {
         )
 
         val application = requireNotNull(this.activity).application
-        val arguments = DetailFragmentArgs.fromBundle(arguments)
 
         // Create an instance of the ViewModel Factory.
         val dataSource = ExpenseDatabase.getInstance(application).expenseDatabaseDao
