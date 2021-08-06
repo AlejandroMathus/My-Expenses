@@ -7,38 +7,42 @@
 
         <variable
             name="newExpenseViewModel"
-            type="com.example.myexpenses.main.NewExpenseViewModel" />
+            type="com.example.myexpenses.newexpense.NewExpenseViewModel" />
 
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/small_margin"
+        android:paddingEnd="@dimen/small_margin">
 
         <EditText
             android:id="@+id/expense_input"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_margin"
-            android:ems="10"
-            android:hint="Expense"
+            android:layout_marginTop="@dimen/big_margin"
+            android:autofillHints="@string/expense"
+            android:hint="@string/expense"
             android:inputType="numberDecimal"
-            android:padding="@dimen/small_margin"
             android:text="@={newExpenseViewModel.amount}"
-            app:layout_constraintBottom_toTopOf="@+id/category_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/category_input"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Category"
-            android:inputType="textPersonName"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:layout_marginTop="@dimen/big_margin"
+            android:autofillHints="@string/category"
+            android:hint="@string/category"
+            android:inputType="none"
+            android:onClick="@{() -> newExpenseViewModel.setCategory()}"
             android:text="@={newExpenseViewModel.category}"
-            app:layout_constraintBottom_toTopOf="@+id/description_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/expense_input" />
@@ -46,31 +50,27 @@
 
         <EditText
             android:id="@+id/description_input"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:ems="10"
-            android:hint="Description"
-            android:inputType="textPersonName"
-            android:paddingTop="@dimen/small_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:autofillHints="@string/description"
+            android:hint="@string/description"
+            android:inputType="text"
             android:text="@={newExpenseViewModel.description}"
-            app:layout_constraintBottom_toTopOf="@+id/submit_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category_input" />
 
         <Button
             android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
             android:onClick="@{() -> newExpenseViewModel.saveExpense()}"
-            android:paddingTop="@dimen/small_margin"
-            android:text="Button"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_input"
+            app:layout_constraintTop_toBottomOf="@id/description_input"
             tools:text="Submit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

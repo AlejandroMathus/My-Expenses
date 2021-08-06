@@ -12,13 +12,9 @@ class DetailViewModel(
 
     val database = dataSource
 
-    private val expense: LiveData<Expense>
+    private val expense: LiveData<Expense> = database.getExpenseWithId(expenseKey)
 
     fun getExpense() = expense
-
-    init {
-        expense = database.getExpenseWithId(expenseKey)
-    }
 
     private val _navigateToMain = MutableLiveData<Boolean?>()
     val navigateToMain: LiveData<Boolean?>

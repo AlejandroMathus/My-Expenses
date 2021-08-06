@@ -1,5 +1,6 @@
 package com.example.myexpenses.newexpense
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.example.myexpenses.R
 import com.example.myexpenses.database.ExpenseDatabase
 
 import com.example.myexpenses.databinding.FragmentNewExpenseBinding
-import com.example.myexpenses.main.NewExpenseViewModel
-import com.example.myexpenses.main.NewExpenseViewModelFactory
 import kotlinx.android.synthetic.main.fragment_new_expense.*
+
+val categories = listOf("Shop", "Entertainment", "Food", "Sport", "Bills", "Transport", "Other")
 
 class NewExpenseFragment : Fragment() {
     override fun onCreateView(
@@ -65,6 +68,15 @@ class NewExpenseFragment : Fragment() {
             }
         })
 
+        newExpenseViewModel.showList.observe(viewLifecycleOwner, Observer { show ->
+            context?.let {
+                if (show == true) {
+                    MaterialDialog(it).show {
+                        listItemsSingleChoice(items = categories)
+                    }
+                }
+            }
+        })
         return binding.root
     }
 }

@@ -1,7 +1,9 @@
-package com.example.myexpenses.main
+package com.example.myexpenses.newexpense
 
 
 import androidx.lifecycle.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.example.myexpenses.database.Expense
 import com.example.myexpenses.database.ExpenseDatabaseDao
 import kotlinx.coroutines.launch
@@ -10,14 +12,17 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
 
     private val database = dataSource
 
+    // Store the values of the Edit Texts
     val amount = MutableLiveData<Double?>()
     val category = MutableLiveData<String>()
     val description = MutableLiveData<String>()
 
+    // Showing the error message for invalid data
     private val _errorMessage = MutableLiveData<Boolean?>()
     val errorMessage: LiveData<Boolean?>
         get() = _errorMessage
 
+    // Navigation to the Main Fragment and save the new expense in database
     private val _navigateToMain = MutableLiveData<Boolean?>()
     val navigateToMain: LiveData<Boolean?>
         get() = _navigateToMain
@@ -49,6 +54,15 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
 
     private fun insert(expense: Expense) = viewModelScope.launch {
         database.insert(expense)
+    }
+
+    // Show single choice list
+    private val _showList = MutableLiveData<Boolean?>()
+    val showList: LiveData<Boolean?>
+        get() = _showList
+
+    fun setCategory() {
+        _showList.value = true
     }
 
     fun mainNavigated() {
