@@ -38,7 +38,8 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
     }
 
     private fun isDataValid(): Boolean {
-        return amount.value != null
+        return amount.value != null &&
+                !category.value.isNullOrEmpty()
     }
 
     private fun buildExpense(): Expense {
