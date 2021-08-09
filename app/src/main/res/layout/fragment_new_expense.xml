@@ -41,7 +41,7 @@
             android:autofillHints="@string/category"
             android:hint="@string/category"
             android:inputType="none"
-            android:onClick="@{() -> newExpenseViewModel.setCategory()}"
+            android:onClick="@{() -> newExpenseViewModel.showCategories()}"
             android:text="@={newExpenseViewModel.category}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

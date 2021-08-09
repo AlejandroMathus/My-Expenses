@@ -2,8 +2,6 @@ package com.example.myexpenses.newexpense
 
 
 import androidx.lifecycle.*
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.example.myexpenses.database.Expense
 import com.example.myexpenses.database.ExpenseDatabaseDao
 import kotlinx.coroutines.launch
@@ -40,8 +38,7 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
     }
 
     private fun isDataValid(): Boolean {
-        return amount.value != null &&
-                !category.value.isNullOrEmpty()
+        return amount.value != null
     }
 
     private fun buildExpense(): Expense {
@@ -56,13 +53,17 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
         database.insert(expense)
     }
 
-    // Show single choice list
+    // Show categories list and set one
     private val _showList = MutableLiveData<Boolean?>()
     val showList: LiveData<Boolean?>
         get() = _showList
 
-    fun setCategory() {
+    fun showCategories() {
         _showList.value = true
+    }
+
+    fun setCategory(selectedCategory: String) {
+        category.value = selectedCategory
     }
 
     fun mainNavigated() {

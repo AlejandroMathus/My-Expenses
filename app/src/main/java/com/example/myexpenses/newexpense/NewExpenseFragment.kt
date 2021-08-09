@@ -1,6 +1,5 @@
 package com.example.myexpenses.newexpense
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,6 @@ import com.example.myexpenses.R
 import com.example.myexpenses.database.ExpenseDatabase
 
 import com.example.myexpenses.databinding.FragmentNewExpenseBinding
-import kotlinx.android.synthetic.main.fragment_new_expense.*
 
 val categories = listOf("Shop", "Entertainment", "Food", "Sport", "Bills", "Transport", "Other")
 
@@ -72,7 +70,9 @@ class NewExpenseFragment : Fragment() {
             context?.let {
                 if (show == true) {
                     MaterialDialog(it).show {
-                        listItemsSingleChoice(items = categories)
+                        listItemsSingleChoice(items = categories) { _, _, text ->
+                            newExpenseViewModel.setCategory("$text")
+                        }
                     }
                 }
             }
