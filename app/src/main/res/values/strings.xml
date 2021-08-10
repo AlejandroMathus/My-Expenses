@@ -5,4 +5,7 @@
     <string name="expense">Expense</string>
     <string name="category">Category</string>
     <string name="description">Description</string>
+    <string name="delete">Delete</string>
+    <string name="close">Close</string>
+    <string name="currency_symbol_string">$</string>
 </resources>

@@ -60,10 +60,9 @@
             android:id="@+id/category_string"
             android:layout_width="@dimen/zero"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="start|center"
             android:paddingEnd="@dimen/small_margin"
             android:paddingRight="@dimen/small_margin"
-
             android:textSize="20sp"
             app:expenseCategoryString="@{thisExpense}"
             app:layout_constraintBottom_toBottomOf="parent"
