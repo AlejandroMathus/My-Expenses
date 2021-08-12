@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">@color/light_blue</color>
+    <color name="colorPrimaryDark">@color/darker_blue</color>
+    <color name="colorAccent">@color/light_blue</color>
+
     <color name="white">#FFFFFFFF</color>
     <color name="dark_blue">#1D2733</color>
     <color name="darker_blue">#212D3B</color>

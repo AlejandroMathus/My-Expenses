@@ -1,6 +1,5 @@
 package com.example.myexpenses
 
-import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -14,10 +13,11 @@ fun EditText.bindAnyToString(value: Any?) {
     value?.let {
         if (value is Double) {
             val newValue = MoneyFormatter().format(value)
-            Log.d("debug", "----------------------"+ newValue)
             if (text.toString() != newValue) {
                 setText(newValue)
             }
+        } else if(value is String && text.toString() != value) {
+            setText(value)
         }
     }
 }
