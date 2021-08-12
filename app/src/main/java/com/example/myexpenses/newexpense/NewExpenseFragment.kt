@@ -17,9 +17,11 @@ import com.example.myexpenses.database.ExpenseDatabase
 
 import com.example.myexpenses.databinding.FragmentNewExpenseBinding
 
-val categories = listOf("Shop", "Entertainment", "Food", "Sport", "Bills", "Transport", "Other")
-
 class NewExpenseFragment : Fragment() {
+
+    val categories = listOf("Shop", "Entertainment", "Food", "Sport", "Bills", "Transport", "Other")
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +79,9 @@ class NewExpenseFragment : Fragment() {
                 }
             }
         })
+
+        activity?.title = "New Expense"
+
         return binding.root
     }
 }

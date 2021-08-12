@@ -65,6 +65,8 @@ class DetailFragment : Fragment() {
             }
         })
 
+        activity?.title = "Expense Detail"
+
         return binding.root
     }
 }

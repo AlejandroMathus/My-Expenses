@@ -37,6 +37,7 @@
             android:onClick="@{() -> mainViewModel.navigateToNewExpense()}"
             android:src="@android:drawable/ic_input_add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:backgroundTint="@color/light_blue"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
