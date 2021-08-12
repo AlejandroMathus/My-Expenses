@@ -8,4 +8,5 @@
     <string name="delete">Delete</string>
     <string name="close">Close</string>
     <string name="currency_symbol_string">$</string>
+    <string name="x">X</string>
 </resources>

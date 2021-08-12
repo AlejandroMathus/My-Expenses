@@ -66,6 +66,10 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
         category.value = selectedCategory
     }
 
+    fun xClicked() {
+        category.value = ""
+    }
+
     fun mainNavigated() {
         _navigateToMain.value = null
     }
