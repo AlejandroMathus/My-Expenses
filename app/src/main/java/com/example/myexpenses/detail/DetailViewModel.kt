@@ -20,11 +20,20 @@ class DetailViewModel(
     val navigateToMain: LiveData<Boolean?>
         get() = _navigateToMain
 
-    private var _showToastEvent = MutableLiveData<Boolean?>()
+    private val _showToastEvent = MutableLiveData<Boolean?>()
     val showToastEvent: LiveData<Boolean?>
         get() = _showToastEvent
 
+    //Show confirmation and delete from database if confirmed.
+    private val _showConfirmation = MutableLiveData<Boolean?>()
+    val showConfirmation: LiveData<Boolean?>
+    get() = _showConfirmation
+
     fun onDelete() {
+        _showConfirmation.value = true
+    }
+
+    fun onDeleteConfirmed() {
         val thisExpense: Expense = expense.value!!
         delete(thisExpense)
         _navigateToMain.value = true

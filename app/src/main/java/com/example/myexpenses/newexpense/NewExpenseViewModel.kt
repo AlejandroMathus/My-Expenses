@@ -70,6 +70,7 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
         category.value = ""
     }
 
+    //Break loops in navigation and toast.
     fun mainNavigated() {
         _navigateToMain.value = null
     }

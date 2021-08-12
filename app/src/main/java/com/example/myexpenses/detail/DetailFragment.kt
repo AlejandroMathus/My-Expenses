@@ -7,19 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.afollestad.materialdialogs.MaterialDialog
 import com.example.myexpenses.R
 import com.example.myexpenses.database.ExpenseDatabase
-import com.example.myexpenses.database.ExpenseDatabaseDao
 import com.example.myexpenses.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
 
-    val arguments: DetailFragmentArgs by navArgs()
+    private val arguments: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +45,10 @@ class DetailFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
+        activity?.title = "Expense Detail"
+
         // Observer to the state variable for Navigating when the Close button is tapped.
-        detailViewModel.navigateToMain.observe(viewLifecycleOwner, Observer {
+        detailViewModel.navigateToMain.observe(viewLifecycleOwner, {
             if (it == true) {
                 this.findNavController().navigate(
                     DetailFragmentDirections.actionDetailFragmentToMainFragment()
@@ -58,14 +58,27 @@ class DetailFragment : Fragment() {
         })
 
         // Observer of the Toast variable for showing it when the Delete button is tapped.
-        detailViewModel.showToastEvent.observe(viewLifecycleOwner, Observer {
+        detailViewModel.showToastEvent.observe(viewLifecycleOwner, {
             if (it == true) {
                 Toast.makeText(context, "Expense deleted!", Toast.LENGTH_SHORT).show()
                 detailViewModel.doneShowingToast()
             }
         })
 
-        activity?.title = "Expense Detail"
+        detailViewModel.showConfirmation.observe(viewLifecycleOwner, { show ->
+            context?.let {
+                if (show == true) {
+                    MaterialDialog(it).show {
+                        title(R.string.confirmation_title)
+                        message(R.string.confirmation_message)
+                        positiveButton(R.string.agree) {
+                            detailViewModel.onDeleteConfirmed()
+                        }
+                        negativeButton(R.string.disagree)
+                    }
+                }
+            }
+        })
 
         return binding.root
     }

@@ -9,4 +9,8 @@
     <string name="close">Close</string>
     <string name="currency_symbol_string">$</string>
     <string name="x">X</string>
+    <string name="confirmation_title">Are you sure?</string>
+    <string name="confirmation_message">This expense will be deleted permanently.</string>
+    <string name="agree">I\'m sure!</string>
+    <string name="disagree">I\'m not...</string>
 </resources>

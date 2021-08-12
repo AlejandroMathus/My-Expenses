@@ -52,8 +52,10 @@ class NewExpenseFragment : Fragment() {
 
         binding.newExpenseViewModel = newExpenseViewModel
 
+        activity?.title = "New Expense"
+
         // Observer to the state variable for Navigating when the Submit button is tapped.
-        newExpenseViewModel.navigateToMain.observe(viewLifecycleOwner, Observer {
+        newExpenseViewModel.navigateToMain.observe(viewLifecycleOwner, {
             if (it == true) {
                 findNavController().navigate(NewExpenseFragmentDirections.actionNewExpenseFragmentToMainFragment())
                 newExpenseViewModel.mainNavigated()
@@ -61,14 +63,15 @@ class NewExpenseFragment : Fragment() {
         })
 
         // Observer of the Toast variable for showing it when the data submitted is not valid.
-        newExpenseViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+        newExpenseViewModel.errorMessage.observe(viewLifecycleOwner, {
             if (it == true) {
-                Toast.makeText(context, "Todo mal", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Expense invalid", Toast.LENGTH_SHORT).show()
                 newExpenseViewModel.doneShowingToast()
             }
         })
 
-        newExpenseViewModel.showList.observe(viewLifecycleOwner, Observer { show ->
+        // Observer of the List variable for showing when the Edit Text is clicked.
+        newExpenseViewModel.showList.observe(viewLifecycleOwner, { show ->
             context?.let {
                 if (show == true) {
                     MaterialDialog(it).show {
@@ -79,8 +82,6 @@ class NewExpenseFragment : Fragment() {
                 }
             }
         })
-
-        activity?.title = "New Expense"
 
         return binding.root
     }
