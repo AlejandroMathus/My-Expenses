@@ -12,7 +12,7 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
 
     // Store the values of the Edit Texts
     val amount = MutableLiveData<Double?>()
-    val category = MutableLiveData<String>()
+    val category = MutableLiveData<String?>()
     val description = MutableLiveData<String>()
 
     // Showing the error message for invalid data
@@ -38,15 +38,14 @@ class NewExpenseViewModel(dataSource: ExpenseDatabaseDao) : ViewModel() {
     }
 
     private fun isDataValid(): Boolean {
-        return amount.value != null &&
-                !category.value.isNullOrEmpty()
+        return amount.value != null
     }
 
     private fun buildExpense(): Expense {
         return Expense(
             expenseAmount = amount.value!!,
             expenseDescription = description.value,
-            expenseCategory = category.value!!
+            expenseCategory = category.value
         )
     }
 

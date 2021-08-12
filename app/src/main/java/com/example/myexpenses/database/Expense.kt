@@ -13,7 +13,7 @@ data class Expense(
     val expenseAmount: Double,
 
     @ColumnInfo(name = "expense_category")
-    val expenseCategory: String,
+    val expenseCategory: String?,
 
     @ColumnInfo(name = "expense_description")
     val expenseDescription: String?
