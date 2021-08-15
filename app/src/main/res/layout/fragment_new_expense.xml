@@ -27,6 +27,8 @@
             android:hint="@string/expense"
             android:inputType="numberDecimal"
             android:text="@={newExpenseViewModel.amount}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +47,8 @@
             android:inputType="none"
             android:onClick="@{() -> newExpenseViewModel.showCategories()}"
             android:text="@={newExpenseViewModel.category}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             app:layout_constraintEnd_toStartOf="@id/x_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/expense_input" />
@@ -73,6 +77,8 @@
             android:hint="@string/description"
             android:inputType="text"
             android:text="@={newExpenseViewModel.description}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category_input" />
